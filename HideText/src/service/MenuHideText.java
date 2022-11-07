@@ -1,11 +1,17 @@
 package service;
 
+import service.inter.menu.MenuHideTextInter;
 import util.FileUtil;
 import util.InputUtil;
 
-public class HideText {
+public class MenuHideText implements MenuHideTextInter {
 
-    public static void hide() {
+    @Override
+    public void process() {
+        hide();
+    }
+
+    public void hide() {
         String container = InputUtil.requiredText("Text faylın gizlədilməsi üçün lazım olan şəkil: ");
         String steqo_file = newFileName(container);
 
@@ -16,7 +22,7 @@ public class HideText {
         System.out.println("Məxfi məlumat gizlədildi!");
     }
 
-    public static String newFileName(String filename) {
+    public String newFileName(String filename) {
         String[] arr = filename.split("\\.");
         return arr[0] + " - new.jpg";
     }

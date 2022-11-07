@@ -1,10 +1,15 @@
 package service;
 
+import service.inter.menu.MenuExtractTextInter;
 import util.FileUtil;
 import util.InputUtil;
 
-public class ExtractText {
+public class MenuExtractText implements MenuExtractTextInter {
 
+    @Override
+    public void process() {
+        extract();
+    }
     public static void extract() {
         String steqo_fayl = InputUtil.requiredText("Steqo fayl: ");
         byte[] content = FileUtil.readBytes(steqo_fayl);
@@ -42,5 +47,6 @@ public class ExtractText {
         String[] arr = filename.split("\\.");
         return arr[0] + " - new.docx";
     }
+
 
 }

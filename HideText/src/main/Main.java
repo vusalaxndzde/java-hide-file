@@ -1,12 +1,10 @@
 package main;
 
-import service.ExtractText;
-import service.HideText;
 
+import util.MenuUtil;
 
 public class Main {
     public static void main(String[] args) {
-        HideText.hide();
-        ExtractText.extract();
+        MenuUtil.showMenu();
     }
 }
