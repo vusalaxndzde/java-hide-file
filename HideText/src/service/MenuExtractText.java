@@ -10,7 +10,7 @@ public class MenuExtractText implements MenuExtractTextInter {
     public void process() {
         extract();
     }
-    public static void extract() {
+    public void extract() {
         String steqo_fayl = InputUtil.requiredText("Steqo fayl: ");
         byte[] content = FileUtil.readBytes(steqo_fayl);
         byte[] key = hexStringToByteArray("FFD9");
@@ -20,10 +20,10 @@ public class MenuExtractText implements MenuExtractTextInter {
         for (int i = 0; index < content.length; i++, index++) {
             secretArr[i] = content[index];
         }
-        FileUtil.writeBytes(newFileName(steqo_fayl), secretArr);
+        FileUtil.writeBytes(FileUtil.newFileName(steqo_fayl, new MenuExtractText()), secretArr);
     }
 
-    public static int findIndex(byte[] content, byte[] key) {
+    public int findIndex(byte[] content, byte[] key) {
         int index = 0;
         for (int i = 0; i < content.length; i++) {
             if (content[i] == key[0] && content[i + 1] == key[1]) {
@@ -33,7 +33,7 @@ public class MenuExtractText implements MenuExtractTextInter {
         return index;
     }
 
-    public static byte[] hexStringToByteArray(String s) {
+    public byte[] hexStringToByteArray(String s) {
         int len = s.length();
         byte[] data = new byte[len / 2];
         for (int i = 0; i < len; i += 2) {
@@ -42,11 +42,5 @@ public class MenuExtractText implements MenuExtractTextInter {
         }
         return data;
     }
-
-    public static String newFileName(String filename) {
-        String[] arr = filename.split("\\.");
-        return arr[0] + " - new.docx";
-    }
-
 
 }

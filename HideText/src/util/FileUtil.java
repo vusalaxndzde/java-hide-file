@@ -1,5 +1,9 @@
 package util;
 
+import service.MenuExtractText;
+import service.MenuHideText;
+import service.inter.Process;
+
 import java.io.*;
 
 public class FileUtil {
@@ -28,6 +32,16 @@ public class FileUtil {
 
     public static void writeBytes(String filename, byte[] arr) {
         writeBytes(filename, arr, false);
+    }
+
+    public static String newFileName(String filename, Process obj) {
+        String[] arr = filename.split("\\.");
+        if (obj instanceof MenuHideText) {
+            return arr[0] + " - new.jpg";
+        } else if (obj instanceof MenuExtractText) {
+            return arr[0] + " - new.docx";
+        }
+        return null;
     }
 
 }
