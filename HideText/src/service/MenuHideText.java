@@ -12,14 +12,14 @@ public class MenuHideText implements MenuHideTextInter {
     }
 
     public void hide() {
-        String container = InputUtil.requiredText("Text faylın gizlədilməsi üçün lazım olan şəkil: ");
+        String container = InputUtil.requiredText("The image needed to hide the text file: ");
         String steqo_file = FileUtil.newFileName(container, new MenuHideText());
 
-        String filename = InputUtil.requiredText("Gizlənəcək text faylı: ");
+        String filename = InputUtil.requiredText("Text file to hide: ");
         FileUtil.writeBytes(steqo_file, FileUtil.readBytes(container));
         byte[] secret_text = FileUtil.readBytes(filename);
         FileUtil.appendBytes(steqo_file, secret_text);
-        System.out.println("Məxfi məlumat gizlədildi!");
+        System.out.println("Confidential information hidden!");
     }
 
 }

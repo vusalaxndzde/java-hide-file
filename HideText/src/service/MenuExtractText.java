@@ -11,7 +11,7 @@ public class MenuExtractText implements MenuExtractTextInter {
         extract();
     }
     public void extract() {
-        String steqo_fayl = InputUtil.requiredText("Steqo fayl: ");
+        String steqo_fayl = InputUtil.requiredText("Stego file: ");
         byte[] content = FileUtil.readBytes(steqo_fayl);
         byte[] key = hexStringToByteArray("FFD9");
         int index = findIndex(content, key);
