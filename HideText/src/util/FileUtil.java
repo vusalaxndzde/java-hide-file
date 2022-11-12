@@ -19,7 +19,8 @@ public class FileUtil {
         try (FileOutputStream writer = new FileOutputStream(filename, append)) {
             writer.write(arr);
         } catch (IOException e) {
-            System.out.println("File not found");
+            //System.out.println("File not found");
+            e.printStackTrace();
         }
     }
 
@@ -33,7 +34,13 @@ public class FileUtil {
 
     public static String newFileName(String filename, String extension) {
         String[] arr = filename.split("[.]");
+        System.out.println(extension);
         return arr[0] + " - new." + extension;
+    }
+
+    public static String getExtension(String filename) {
+        String[] arr = filename.split("[.]");
+        return arr[1];
     }
 
 }
