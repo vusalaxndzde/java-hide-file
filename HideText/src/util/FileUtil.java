@@ -34,7 +34,6 @@ public class FileUtil {
 
     public static String newFileName(String filename, String extension) {
         String[] arr = filename.split("[.]");
-        System.out.println(extension);
         return arr[0] + " - new." + extension;
     }
 
