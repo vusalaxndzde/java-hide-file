@@ -1,8 +1,5 @@
 package util;
 
-import service.MenuExtractText;
-import service.MenuHideText;
-import service.inter.Process;
 
 import java.io.*;
 
@@ -34,14 +31,9 @@ public class FileUtil {
         writeBytes(filename, arr, false);
     }
 
-    public static String newFileName(String filename, Process obj) {
-        String[] arr = filename.split("\\.");
-        if (obj instanceof MenuHideText) {
-            return arr[0] + " - new.jpg";
-        } else if (obj instanceof MenuExtractText) {
-            return arr[0] + " - new.docx";
-        }
-        return null;
+    public static String newFileName(String filename, String extension) {
+        String[] arr = filename.split("[.]");
+        return arr[0] + " - new." + extension;
     }
 
 }

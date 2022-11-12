@@ -20,7 +20,7 @@ public class MenuExtractText implements MenuExtractTextInter {
         for (int i = 0; index < content.length; i++, index++) {
             secretArr[i] = content[index];
         }
-        FileUtil.writeBytes(FileUtil.newFileName(steqo_fayl, new MenuExtractText()), secretArr);
+        FileUtil.writeBytes(FileUtil.newFileName(steqo_fayl, "docx"), secretArr);
     }
 
     public int findIndex(byte[] content, byte[] key) {

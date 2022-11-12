@@ -13,7 +13,7 @@ public class MenuHideText implements MenuHideTextInter {
 
     public void hide() {
         String container = InputUtil.requiredText("The image needed to hide the text file: ");
-        String steqo_file = FileUtil.newFileName(container, new MenuHideText());
+        String steqo_file = FileUtil.newFileName(container, "jpg");
 
         String filename = InputUtil.requiredText("Text file to hide: ");
         FileUtil.writeBytes(steqo_file, FileUtil.readBytes(container));
