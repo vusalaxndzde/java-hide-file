@@ -1,5 +1,6 @@
 package service;
 
+import bean.Config;
 import service.inter.menu.MenuHideTextInter;
 import util.FileUtil;
 import util.InputUtil;
@@ -21,7 +22,7 @@ public class MenuHideText implements MenuHideTextInter {
         FileUtil.appendBytes(steqo_file, secret_text);
 
         String fileExtension = FileUtil.getExtension(filename);
-        FileUtil.appendBytes(steqo_file, ("@ext" + fileExtension).getBytes());
+        FileUtil.appendBytes(steqo_file, (Config.getExtensionKey() + fileExtension).getBytes());
         System.out.println("Confidential file hidden!");
     }
 
