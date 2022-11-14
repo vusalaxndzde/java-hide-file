@@ -19,8 +19,7 @@ public class FileUtil {
         try (FileOutputStream writer = new FileOutputStream(filename, append)) {
             writer.write(arr);
         } catch (IOException e) {
-            //System.out.println("File not found");
-            e.printStackTrace();
+            System.out.println("File not found");
         }
     }
 

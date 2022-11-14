@@ -10,6 +10,7 @@ public class MenuExtractText implements MenuExtractTextInter {
     public void process() {
         extract();
     }
+
     public void extract() {
         String steqo_fayl = InputUtil.requiredText("Stego file: ");
         byte[] content = FileUtil.readBytes(steqo_fayl);
@@ -36,8 +37,10 @@ public class MenuExtractText implements MenuExtractTextInter {
     public int findIndex(byte[] content, byte[] key) {
         int index = 0;
         for (int i = 0; i < content.length; i++) {
-            if (content[i] == key[0] && content[i + 1] == key[1]) {
-                index = i + 2;
+            if (content[i] == key[0]) {
+                if (check(i, content, key)) {
+                    index = i + key.length;
+                }
             }
         }
         return index;
@@ -58,12 +61,12 @@ public class MenuExtractText implements MenuExtractTextInter {
     }
 
     private boolean check(int index, byte[] content, byte[] extKey) {
-        int extKeyIndex = 0;
-        while (extKeyIndex != extKey.length) {
-            if (extKey[extKeyIndex] != content[index]) {
+        int keyIndex = 0;
+        while (keyIndex != extKey.length) {
+            if (extKey[keyIndex] != content[index]) {
                 return false;
             }
-            extKeyIndex++;
+            keyIndex++;
             index++;
         }
         return true;
