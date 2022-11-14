@@ -1,5 +1,6 @@
 package service;
 
+import bean.Config;
 import service.inter.menu.MenuExtractTextInter;
 import util.FileUtil;
 import util.InputUtil;
@@ -15,11 +16,11 @@ public class MenuExtractText implements MenuExtractTextInter {
         String steqo_fayl = InputUtil.requiredText("Stego file: ");
         byte[] content = FileUtil.readBytes(steqo_fayl);
 
-        String extKey = "@ext";
+        String extKey = Config.getExtensionKey();
         int indexExt = findExtensionIndex(content, extKey);
         String extStr = getExtension(indexExt, content);
 
-        String hexCode = "FFD9";
+        String hexCode = Config.getHexKey();
         byte[] secretArr = getSecretContent(hexCode, indexExt, extKey, content);
         FileUtil.writeBytes(FileUtil.newFileName(steqo_fayl, extStr), secretArr);
         System.out.println("Confidential file extracted!");
