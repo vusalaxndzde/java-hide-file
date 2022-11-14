@@ -17,24 +17,33 @@ public class MenuExtractText implements MenuExtractTextInter {
 
         String extKey = "@ext";
         int indexExt = findExtensionIndex(content, extKey);
-        int endOfSecretArr = indexExt;
-        byte[] extArr = new byte[content.length - indexExt];
-        for (int i = 0; i < extArr.length; i++, indexExt++) {
-            extArr[i] = content[indexExt];
-        }
-        String extStr = new String(extArr);
+        String extStr = getExtension(indexExt, content);
 
-        byte[] key = hexStringToByteArray("FFD9");
-        int index = findIndex(content, key);
-        byte[] secretArr = new byte[endOfSecretArr - extKey.length() - index];
-        for (int i = 0; i < secretArr.length; i++, index++) {
-            secretArr[i] = content[index];
-        }
+        String hexCode = "FFD9";
+        byte[] secretArr = getSecretContent(hexCode, indexExt, extKey, content);
         FileUtil.writeBytes(FileUtil.newFileName(steqo_fayl, extStr), secretArr);
         System.out.println("Confidential file extracted!");
     }
 
-    public int findIndex(byte[] content, byte[] key) {
+    public byte[] getSecretContent(String hexCode, int indexExt, String extKey, byte[] content) {
+        byte[] key = hexStringToByteArray(hexCode);
+        int index = findSecretContentIndex(content, key);
+        byte[] secretArr = new byte[indexExt - extKey.length() - index];
+        for (int i = 0; i < secretArr.length; i++, index++) {
+            secretArr[i] = content[index];
+        }
+        return secretArr;
+    }
+
+    public String getExtension(int indexExt, byte[] content) {
+        byte[] extArr = new byte[content.length - indexExt];
+        for (int i = 0; i < extArr.length; i++, indexExt++) {
+            extArr[i] = content[indexExt];
+        }
+        return new String(extArr);
+    }
+
+    public int findSecretContentIndex(byte[] content, byte[] key) {
         int index = 0;
         for (int i = 0; i < content.length; i++) {
             if (content[i] == key[0]) {
